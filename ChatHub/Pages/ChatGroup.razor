@@ -17,7 +17,7 @@
         </div>
     </div>
     <div>
-        <input /><button>Send</button>
+        <input id="messageBox" @bind-value="@message" /><button @onclick="@SendMessage">Send</button>
     </div>
 </div>
 
@@ -28,8 +28,26 @@
 
     private List<UserMessage> messages { get; set; } = new List<UserMessage>();
 
+    private string message { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        messages = messageService.GetMessages().OrderByDescending(or => or.TimeStamp).ToList();
+        messages = messageService.GetMessages();
+    }
+
+    private void SendMessage()
+    {
+        var usermessage = new UserMessage()
+        {
+            Message = message,
+            TimeStamp = DateTime.Now,
+            UserName = userName
+        };
+
+        if(messageService.SentMessage(usermessage))
+        {
+            messages.Add(usermessage);
+        }
+
     }
 }

@@ -38,7 +38,7 @@ namespace ChatHub.Services.Logic
 
         public bool SentMessage(UserMessage message)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

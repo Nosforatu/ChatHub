@@ -1,0 +1,20 @@
+﻿@page "/chatGroup"
+@using Models;
+@using Pages;
+
+<div>
+    <div>
+        @for(int x = 0; x < 10; x++)
+        {
+            <MessageBlock />
+        }
+    </div>
+    <div>
+        <input /><button>Send</button>
+    </div>
+</div>
+
+
+@code {
+
+}

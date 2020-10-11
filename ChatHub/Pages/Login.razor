@@ -1,0 +1,49 @@
+﻿@page "/Login"
+
+@using Models;
+
+<div class="row">
+    <EditForm Model="@loginModel" OnValidSubmit="@LoginUser">
+        <DataAnnotationsValidator />
+        <div class="row">
+            <div class="col">
+                <div class="form-group row">
+                    <label for="Name" class="">Name</label>
+                    <div>
+                        <InputText id="Name" @bind-Value="loginModel.Name" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group row">
+                    <label for="Surname" class="">Surname</label>
+                    <div>
+                        <InputText id="Surname" @bind-Value="loginModel.Surname" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group row">
+                    <label for="" class="">Username</label>
+                    <div>
+                        <InputText id="Username" @bind-Value="loginModel.UserName" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Start chat</button>
+    </EditForm>
+    
+</div>
+
+@code {
+    private LoginModel loginModel = new LoginModel();
+
+    private async Task LoginUser()
+    {
+        
+    }
+}

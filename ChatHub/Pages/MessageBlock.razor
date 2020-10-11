@@ -1,0 +1,21 @@
+﻿@page "/messageBlock"
+
+@using Models;
+
+<div class="card">
+    <div class="card-body">
+        <div>
+            @userMessage.Message
+        </div>
+        <div>
+            <small>@userMessage.UserName</small><small>@userMessage.TimeStamp.ToString("hh:MM")</small>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public UserMessage userMessage { get; set; } = new UserMessage();
+
+}

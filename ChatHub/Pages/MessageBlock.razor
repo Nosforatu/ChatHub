@@ -3,8 +3,8 @@
 @using Models;
 
 <div class="card">
-    <div class="card-body">
-        <div>
+    <div class="card-body ">
+        <div class="alert @style">
             @userMessage.Message
         </div>
         <div>
@@ -17,5 +17,23 @@
 
     [Parameter]
     public UserMessage userMessage { get; set; } = new UserMessage();
+
+    private string style { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        switch(userMessage.Type)
+        {
+            case UserMessage.MessgageType.Othere:
+                style = "alert-secondary othe-message";
+                break;
+            case UserMessage.MessgageType.Server:
+                style = "alert-primary server-notification";
+                break;
+            case UserMessage.MessgageType.User:
+                style = "alert-success user-message";
+                break;
+        }
+    }
 
 }

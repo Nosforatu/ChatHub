@@ -1,13 +1,17 @@
 ﻿@page "/chatGroup"
+@page "/chatGroup/{userName}"
+
 @using Models;
 @using Pages;
 
 <div>
-    <div>
-        @for(int x = 0; x < 10; x++)
-        {
-            <MessageBlock />
-        }
+    <div class="card">
+        <div class="card-body">
+            @for (int x = 0; x < 10; x++)
+            {
+                <MessageBlock />
+            }
+        </div>
     </div>
     <div>
         <input /><button>Send</button>
@@ -16,5 +20,6 @@
 
 
 @code {
-
+    [Parameter]
+    public string userName { get; set; } = "User";
 }

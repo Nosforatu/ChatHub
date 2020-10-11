@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ChatHub.Areas.Identity;
 using ChatHub.Data;
+using ChatHub.Services.Interfaces;
+using ChatHub.Services.Logic;
 
 namespace ChatHub
 {
@@ -40,6 +42,7 @@ namespace ChatHub
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<IMessagesService, MessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

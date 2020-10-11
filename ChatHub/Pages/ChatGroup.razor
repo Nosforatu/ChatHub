@@ -1,15 +1,18 @@
 ﻿@page "/chatGroup"
 @page "/chatGroup/{userName}"
 
+@using Services.Interfaces;
 @using Models;
 @using Pages;
+
+@inject IMessagesService messageService;
 
 <div>
     <div class="card">
         <div class="card-body">
-            @for (int x = 0; x < 10; x++)
+            @for(int x = 0; x < messages.Count; x++)
             {
-                <MessageBlock />
+                <MessageBlock userMessage="@messages[x]" />
             }
         </div>
     </div>
@@ -22,4 +25,11 @@
 @code {
     [Parameter]
     public string userName { get; set; } = "User";
+
+    private List<UserMessage> messages { get; set; } = new List<UserMessage>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        messages = messageService.GetMessages().OrderByDescending(or => or.TimeStamp).ToList();
+    }
 }

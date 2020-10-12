@@ -25,7 +25,7 @@ namespace ChatApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Messages>>> GetMessages()
         {
-            return await _context.Messages.ToListAsync();
+            return await _context.Messages.Take(50).ToListAsync();
         }
 
         // GET: api/Messages/5

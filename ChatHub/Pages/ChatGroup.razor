@@ -12,7 +12,7 @@
         <div class="card-body">
             @for(int x = 0; x < messages.Count; x++)
             {
-                <MessageBlock userMessage="@messages[x]" />
+                <MessageBlock userMessage="@messages[x]" currentUser="@userName" />
             }
         </div>
     </div>
@@ -35,7 +35,7 @@
         messages = await messageService.GetMessages();
     }
 
-    private void SendMessage()
+    private async Task SendMessage()
     {
         var usermessage = new UserMessage()
         {
@@ -44,7 +44,7 @@
             UserName = userName
         };
 
-        if(messageService.SentMessage(usermessage))
+        if(await messageService.SendMessage(usermessage))
         {
             messages.Add(usermessage);
         }

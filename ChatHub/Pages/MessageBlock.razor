@@ -18,21 +18,26 @@
     [Parameter]
     public UserMessage userMessage { get; set; } = new UserMessage();
 
+    [Parameter]
+    public string currentUser { get; set; } = null;
+
     private string style { get; set; } = "";
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        switch(userMessage.Type)
+
+        if(userMessage.UserName == null)
         {
-            case UserMessage.MessgageType.Othere:
-                style = "alert-secondary othe-message";
-                break;
-            case UserMessage.MessgageType.Server:
-                style = "alert-primary server-notification";
-                break;
-            case UserMessage.MessgageType.User:
-                style = "alert-success user-message";
-                break;
+            style = "alert-primary server-notification";
+        }
+
+        if(userMessage.UserName == currentUser)
+        {
+            style = "alert-success user-message";
+        }
+        else
+        {
+            style = "alert-secondary othe-message";
         }
     }
 

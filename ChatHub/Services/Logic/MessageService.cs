@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ChatHub.Services.Logic
@@ -20,39 +21,17 @@ namespace ChatHub.Services.Logic
 
         public async Task<List<UserMessage>> GetMessages()
         {
-
             HttpResponseMessage response = await httpClient.GetAsync("https://localhost:44311/api/messages");
-            var temp = JsonConvert.DeserializeObject<List<UserMessage>>(await response.Content.ReadAsStringAsync());
-
-
-            return new List<UserMessage>()
-            {
-                new UserMessage()
-                {
-                    Message = "Message One",
-                    TimeStamp = DateTime.Now,
-                    Type = UserMessage.MessgageType.Server
-                },
-                new UserMessage()
-                {
-                    Message = "Message Two",
-                    TimeStamp = DateTime.Now,
-                    Type = UserMessage.MessgageType.Othere, 
-                    UserName = "John"
-                },
-                new UserMessage()
-                {
-                    Message = "Message three",
-                    TimeStamp = DateTime.Now,
-                    Type = UserMessage.MessgageType.User, 
-                    UserName = "Jane"
-                }
-            };
+            var responseString = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<UserMessage>>(responseString);
         }
 
-        public bool SentMessage(UserMessage message)
+        public async Task<bool> SendMessage(UserMessage message)
         {
-            return true;
+            var messageString = JsonConvert.SerializeObject(message);
+            var contentData = new StringContent(messageString, Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync("https://localhost:44311/api/messages", contentData);
+            return (result.StatusCode == System.Net.HttpStatusCode.Created);
         }
     }
 }

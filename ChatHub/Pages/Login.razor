@@ -1,7 +1,9 @@
 ﻿@page "/Login"
 
 @using Models;
+@using Services;
 @inject NavigationManager navigationManager;
+@inject ChatHub.Services.Interfaces.IUserService userservice;
 
 <div class="row">
     <EditForm Model="@loginModel" OnValidSubmit="@LoginUser">
@@ -45,6 +47,10 @@
 
     private async Task LoginUser()
     {
-        navigationManager.NavigateTo($"/chatGroup/{loginModel.UserName}");
+        string userName = await userservice.GetOrCreateUser(loginModel);
+        if(!string.IsNullOrEmpty(userName))
+        {
+            navigationManager.NavigateTo($"chatGroup/{userName}");
+        }
     }
 }

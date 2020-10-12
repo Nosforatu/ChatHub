@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ChatHub.Services.Interfaces
 {
-    public interface IMessagesService
+    public interface IUserService
     {
-        Task<bool> SendMessage(UserMessage message);
-        Task<List<UserMessage>> GetMessages();
+        public Task<string> GetOrCreateUser(LoginModel userName);
     }
 }

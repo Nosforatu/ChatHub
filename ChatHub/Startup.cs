@@ -43,6 +43,7 @@ namespace ChatHub
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddSingleton<WeatherForecastService>();
             services.AddHttpClient<IMessagesService, MessageService>();
+            services.AddHttpClient<IUserService, UserService>();
             
         }
 

@@ -9,6 +9,6 @@ namespace ChatHub.Services.Interfaces
     public interface IMessagesService
     {
         bool SentMessage(UserMessage message);
-        List<UserMessage> GetMessages();
+        Task<List<UserMessage>> GetMessages();
     }
 }

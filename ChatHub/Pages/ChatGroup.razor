@@ -32,7 +32,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        messages = messageService.GetMessages();
+        messages = await messageService.GetMessages();
     }
 
     private void SendMessage()

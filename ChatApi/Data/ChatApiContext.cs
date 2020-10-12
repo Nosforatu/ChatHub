@@ -15,5 +15,6 @@ namespace ChatApi.Data
         }
 
         public DbSet<ChatApi.Models.Messages> Messages { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

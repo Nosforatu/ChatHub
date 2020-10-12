@@ -10,7 +10,7 @@ namespace ChatApi.Models
     {
         [Key]
         public Guid Id { get; set; }
-        public string Username { get; set; }
+        public User User { get; set; }
         public string Message { get; set; }
         public string TimeStamp { get; set; }
     }

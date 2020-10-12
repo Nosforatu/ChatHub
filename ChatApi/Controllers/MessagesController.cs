@@ -80,6 +80,7 @@ namespace ChatApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Messages>> PostMessages(Messages messages)
         {
+            messages.Id = Guid.NewGuid();
             _context.Messages.Add(messages);
             await _context.SaveChangesAsync();
 

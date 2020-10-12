@@ -1,16 +1,30 @@
 ﻿using ChatHub.Models;
 using ChatHub.Services.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ChatHub.Services.Logic
 {
     public class MessageService : IMessagesService
     {
-        public List<UserMessage> GetMessages()
+        private HttpClient httpClient;
+
+        public MessageService(HttpClient httpClient)
         {
+            this.httpClient = httpClient;
+        }
+
+        public async Task<List<UserMessage>> GetMessages()
+        {
+
+            HttpResponseMessage response = await httpClient.GetAsync("https://localhost:44311/api/messages");
+            var temp = JsonConvert.DeserializeObject<List<UserMessage>>(await response.Content.ReadAsStringAsync());
+
+
             return new List<UserMessage>()
             {
                 new UserMessage()
